@@ -1,7 +1,7 @@
 # Nicolas Mattar
 ### Software Engineering Student · McGill University
 
-Building practical software that makes people's work easier.
+Building practical software that makes people's lives easier.
 
 [About](#about) · [Projects](#projects) · [Skills](#skills) · [Contact](#contact)
 
@@ -9,11 +9,11 @@ Building practical software that makes people's work easier.
 
 ## About
 
-I'm a second-year Software Engineering co-op student at McGill University with a strong interest in artificial intelligence and software development. I enjoy learning through hands-on projects and using technology to solve real-world problems.
+I'm Nicolas, a second-year Software Engineering student at McGill University, also taking an AI Software Development bootcamp through Circuit Stream.
 
-Through my studies and projects, I'm building both a strong engineering foundation and practical development experience. I'm proud of the projects that have pushed me to learn new technologies and become more independent as a developer. I believe technology is most valuable when it solves a genuine problem for the people using it.
+What draws me to software is the combination of problem-solving and creativity. I enjoy working out how things fit together, and being able to take an idea and turn it into something that actually works makes it even more rewarding. When I come across a problem, I like knowing I can try to build a solution myself.
 
-I'm seeking a software engineering co-op opportunity for Summer 2027.
+AI is a particular interest of mine, and I'm enjoying exploring it as I develop my skills and take on new projects.
 
 ## Projects
 
@@ -24,6 +24,8 @@ A web application where users can sign in with Google and create, edit, and dele
 Building this application helped me learn how to connect a frontend to an Express backend, store data in MongoDB, and implement authentication and user-specific access.
 
 **Technologies:** JavaScript · Node.js · Express · MongoDB · EJS · Google OAuth
+
+[View source code on GitHub](https://github.com/N1kos07/NoteTakingAPP)
 
 ## Skills
 
