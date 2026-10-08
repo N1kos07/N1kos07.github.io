@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <meta name="description" content="Nicolas Mattar — Software Engineering Co-op student at McGill University, with a minor in Applied Artificial Intelligence.">
+  <title>Nicolas Mattar · Software Engineering</title>
+  <style>
+    :root { --paper:#f6f4ef; --ink:#172632; --muted:#596872; --line:#d6d9d4; --accent:#c85338; --accent-soft:#f4e2da; --card:#fffefa; --blue:#d9e5e6; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.7; }
+    a { color:inherit; text-decoration:none; }
+    a:focus-visible, button:focus-visible { outline:3px solid var(--accent); outline-offset:5px; }
+    ::selection { background:#f4c4b5; color:var(--ink); }
+    .skip { position:absolute; z-index:10; top:-60px; left:1rem; padding:.5rem 1rem; background:var(--ink); color:white; }
+    .skip:focus { top:1rem; }
+    .shell { max-width:1440px; min-height:100vh; margin:auto; display:grid; grid-template-columns:minmax(300px,40%) minmax(0,1fr); }
+    .sidebar { position:sticky; top:0; height:100vh; padding:clamp(2.5rem,7vw,6rem) clamp(2rem,5vw,5.5rem) 3rem; display:flex; flex-direction:column; overflow:auto; }
+    .eyebrow,.section-kicker,.project-no,.note-label { color:var(--accent); font-size:.72rem; font-weight:750; letter-spacing:.17em; text-transform:uppercase; }
+    .identity { margin-top:1.1rem; }
+    .identity h1 { font-family:Georgia,"Times New Roman",serif; font-size:clamp(3.7rem,6vw,6rem); font-weight:400; line-height:.96; letter-spacing:-.067em; margin:0 0 1.1rem; }
+    .identity h1 span { display:block; }
+    .role { font-size:1rem; font-weight:650; letter-spacing:-.025em; margin:0; }
+    .school { color:var(--muted); margin:.1rem 0 0; font-size:.95rem; }
+    .orbit { position:relative; width:100px; height:100px; margin:2.3rem 0 0; }
+    .orbit::before,.orbit::after { content:""; position:absolute; border:1px solid #9caba9; border-radius:50%; }
+    .orbit::before { inset:3px 16px; transform:rotate(-32deg); }
+    .orbit::after { inset:3px 16px; transform:rotate(42deg); }
+    .orbit i { position:absolute; z-index:1; width:17px; height:17px; border-radius:50%; background:var(--accent); left:43px; top:43px; box-shadow:0 0 0 8px var(--accent-soft); }
+    .side-nav { margin-top:2.5rem; display:flex; flex-direction:column; align-items:flex-start; gap:.65rem; }
+    .side-nav a { display:flex; align-items:center; gap:1rem; color:#7b898c; text-transform:uppercase; letter-spacing:.16em; font-size:.72rem; font-weight:750; padding:.26rem 0; transition:color .2s; }
+    .side-nav a::before { content:""; width:26px; height:1px; background:currentColor; transition:width .2s; }
+    .side-nav a:hover,.side-nav a.active { color:var(--ink); }
+    .side-nav a.active::before,.side-nav a:hover::before { width:53px; background:var(--accent); }
+    .sidebar-bottom { margin-top:auto; display:flex; gap:1.4rem; padding-top:2rem; color:var(--muted); font-size:.86rem; font-weight:600; }
+    .sidebar-bottom a:hover { color:var(--accent); }
+    .content { padding:clamp(3rem,9vw,8.6rem) clamp(2rem,7vw,7rem) 5rem 2rem; }
+    section { scroll-margin-top:2rem; margin-bottom:clamp(5.5rem,11vw,10rem); }
+    .section-head { display:flex; align-items:center; gap:1rem; margin:0 0 2.3rem; }
+    .section-head::after { content:""; flex:1; height:1px; background:var(--line); }
+    .section-kicker { white-space:nowrap; }
+    .intro { font-family:Georgia,"Times New Roman",serif; font-size:clamp(1.85rem,2.7vw,2.8rem); line-height:1.27; letter-spacing:-.04em; margin:0 0 2.25rem; max-width:690px; }
+    .prose { max-width:620px; color:var(--muted); font-size:1.05rem; }
+    .prose p { margin:0 0 1.35rem; }
+    .prose strong { color:var(--ink); font-weight:650; }
+    .project-card { display:block; background:var(--card); border:1px solid var(--line); border-radius:20px; overflow:hidden; box-shadow:0 24px 56px -48px #1a3438a8; transition:transform .22s,box-shadow .22s; }
+    .project-card:hover { transform:translateY(-4px); box-shadow:0 30px 60px -42px #1a34387a; }
+    .project-art { min-height:250px; padding:2rem; background:linear-gradient(135deg,#d8e5e4,#e9ebe5 55%,#f0e2d8); display:flex; align-items:center; justify-content:center; }
+    .mock-window { width:min(100%,490px); height:190px; border-radius:11px; background:#fffdf8; box-shadow:0 21px 40px #44585b29; display:grid; grid-template-columns:34% 1fr; overflow:hidden; transform:rotate(-2deg); }
+    .mock-list { border-right:1px solid #e9e8e1; padding:16px 10px; }
+    .mock-list b { display:block; font-size:10px; margin:0 0 14px; }
+    .mock-list em { display:block; height:30px; border-radius:5px; margin-bottom:7px; background:#f3efe7; }
+    .mock-list em:nth-of-type(2) { background:#eef1ee; width:87%; }
+    .mock-list em:nth-of-type(3) { background:#eef1ee; width:72%; }
+    .mock-note { padding:20px 25px; }
+    .mock-note b { font-family:Georgia,serif; font-size:20px; font-weight:400; }
+    .mock-note i { display:block; height:5px; border-radius:5px; background:#d9dedc; margin-top:15px; width:90%; }
+    .mock-note i:nth-of-type(2) { width:76%; }.mock-note i:nth-of-type(3) { width:83%; }.mock-note i:nth-of-type(4) { width:47%; }
+    .project-body { padding:1.8rem 2rem 2rem; }
+    .project-top { display:flex; justify-content:space-between; gap:1rem; align-items:center; }
+    .project-meta { display:flex; align-items:center; flex-wrap:wrap; gap:.4rem 1rem; }
+    .project-date { color:var(--muted); font-size:.75rem; white-space:nowrap; }
+    .project-top .arrow { font-size:1.5rem; color:var(--accent); line-height:1; }
+    .project-body h3 { font-family:Georgia,serif; font-size:1.85rem; font-weight:400; letter-spacing:-.035em; margin:.5rem 0 .75rem; }
+    .project-body p { color:var(--muted); margin:0 0 1.2rem; max-width:560px; font-size:.96rem; }
+    .tags { display:flex; flex-wrap:wrap; gap:.48rem; list-style:none; padding:0; margin:0; }
+    .tags li { padding:.28rem .7rem; border-radius:50px; color:#276668; background:#e5f0ed; font-size:.74rem; font-weight:650; }
+    .skills-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.6rem 2.2rem; }
+    .skill-group { padding-top:1rem; border-top:1px solid var(--line); }
+    .skill-group h3 { font-size:.76rem; letter-spacing:.13em; text-transform:uppercase; margin:0 0 .55rem; }
+    .skill-group p { color:var(--muted); margin:0; }
+    .contact-panel { background:var(--ink); color:#f8f7f1; padding:2.2rem; border-radius:20px; position:relative; overflow:hidden; }
+    .contact-panel::after { content:""; width:180px; height:180px; border:1px solid #819c9b; border-radius:50%; position:absolute; right:-55px; top:-75px; box-shadow:0 0 0 34px #ffffff0a,0 0 0 68px #ffffff08; pointer-events:none; }
+    .contact-panel h3 { font-family:Georgia,serif; font-size:2rem; line-height:1.2; font-weight:400; margin:.5rem 0 .8rem; }
+    .contact-panel p { color:#bac5c6; max-width:400px; margin:0 0 1.6rem; }
+    .contact-panel a { display:inline-block; background:#f4e7de; color:var(--ink); padding:.7rem 1.1rem; border-radius:5px; font-size:.86rem; font-weight:700; }
+    .contact-panel a:hover { background:white; }
+    footer { color:#798588; font-size:.8rem; padding-bottom:2rem; }
+    @media (max-width:900px) {
+      .shell { display:block; }.sidebar { position:relative; height:auto; overflow:visible; padding:3rem 1.5rem 1rem; }.identity h1 span { display:inline; }.identity h1 span+span::before { content:" "; }
+      .orbit { display:none; }.side-nav { flex-direction:row; flex-wrap:wrap; gap:1.4rem; margin-top:2.4rem; }.side-nav a::before { display:none; }.side-nav a.active { border-bottom:2px solid var(--accent); }
+      .sidebar-bottom { margin-top:1.7rem; padding-top:0; }.content { padding:3.4rem 1.5rem 2rem; } section { scroll-margin-top:1rem; }
+    }
+    @media (max-width:520px) { .identity h1 { font-size:3.3rem; }.intro { font-size:1.9rem; }.skills-grid { grid-template-columns:1fr; }.project-art { min-height:210px; padding:1rem; }.mock-window { height:165px; }.project-body { padding:1.4rem; }.side-nav { gap:.8rem 1.2rem; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none!important; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="shell">
+    <aside class="sidebar">
+      <div>
+        <div class="eyebrow">Portfolio</div>
+        <div class="identity"><h1><span>Nicolas</span><span>Mattar</span></h1><p class="role">Software Engineering Co-op student</p><p class="school">McGill University · Montréal</p></div>
+        <nav class="side-nav" aria-label="Sections"><a href="#about" class="active">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav>
+        <div class="orbit" aria-hidden="true"><i></i></div>
+      </div>
+      <div class="sidebar-bottom"><a href="https://github.com/N1kos07" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#contact">Let's connect ↗</a></div>
+    </aside>
+    <main id="main" class="content">
+      <section id="about" aria-labelledby="about-label">
+        <div class="section-head" aria-hidden="true"><span class="section-kicker">01 / About</span></div>
+        <h2 id="about-label" class="intro">About Me</h2>
+        <div class="prose">
+          <p>I'm Nicolas, a second-year Software Engineering Co-op student at McGill University, pursuing a minor in Applied Artificial Intelligence.</p>
+          <p>Alongside my degree, I'm taking an AI Software Development bootcamp through Circuit Stream. My university coursework has given me a foundation in programming with Python and Java, as well as algorithms, data structures, and the mathematical concepts behind computing. I've also been able to apply and expand on that knowledge through the bootcamp, where I've gained hands-on experience with web development and building applications.</p>
+          <p>What I love most about software engineering is the freedom to turn my ideas into reality. I like understanding how different parts of a system work together and using that knowledge to create something of my own. I'm also particularly interested in AI and the possibilities it opens up for future projects.</p>
+        </div>
+      </section>
+      <section id="projects" aria-labelledby="projects-label">
+        <h2 id="projects-label" class="section-head"><span class="section-kicker">02 / Selected work</span></h2>
+        <a class="project-card" href="https://github.com/N1kos07/NoteTakingAPP" target="_blank" rel="noopener noreferrer" aria-label="View the Note-Taking App source code on GitHub">
+          <div class="project-art" aria-hidden="true"><div class="mock-window"><div class="mock-list"><b>NOTES</b><em></em><em></em><em></em></div><div class="mock-note"><b>Your ideas, in one place.</b><i></i><i></i><i></i><i></i></div></div></div>
+          <div class="project-body"><div class="project-top"><div class="project-meta"><span class="project-no">Bootcamp project / 01</span><time class="project-date" datetime="2026-09">September 2026</time></div><span class="arrow" aria-hidden="true">↗</span></div><h3>Note-Taking App</h3><p>A web app where users sign in with Google and create, edit, and delete their own notes. I built the Express routes, stored notes in MongoDB, and made sure each account can only access its own notes.</p><ul class="tags" aria-label="Technologies used"><li>JavaScript</li><li>Express</li><li>MongoDB</li><li>EJS</li><li>Google OAuth</li></ul></div>
+        </a>
+      </section>
+      <section id="skills" aria-labelledby="skills-label">
+        <h2 id="skills-label" class="section-head"><span class="section-kicker">03 / Skills</span></h2>
+        <div class="skills-grid"><div class="skill-group"><h3>Languages</h3><p>Python · Java · JavaScript · HTML · CSS</p></div><div class="skill-group"><h3>Web &amp; backend</h3><p>Node.js · Express · EJS · MongoDB · Mongoose · Passport.js</p></div><div class="skill-group"><h3>Testing &amp; development</h3><p>Git · GitHub · Postman · Mocha · Chai</p></div></div>
+      </section>
+      <section id="contact" aria-labelledby="contact-label">
+        <h2 id="contact-label" class="section-head"><span class="section-kicker">04 / Contact</span></h2>
+        <div class="contact-panel"><span class="note-label">Say hello</span><h3>I'd love to connect.</h3><p>I'm open to conversations about software development and co-op opportunities.</p><a href="https://www.linkedin.com/in/nicolas-mattar-7267a4417/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
+      </section>
+      <footer>© <span id="year">2026</span> Nicolas Mattar</footer>
+    </main>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const links = [...document.querySelectorAll('.side-nav a')];
+    const sections = links.map(link => document.querySelector(link.getAttribute('href')));
+    function updateActiveSection() {
+      let activeIndex = 0;
+      const marker = Math.min(window.innerHeight * 0.25, 160);
+      if (window.scrollY > 4) {
+        sections.forEach((section, index) => {
+          if (section.getBoundingClientRect().top <= marker) activeIndex = index;
+        });
+        if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+          activeIndex = sections.length - 1;
+        }
+      }
+      links.forEach((link, index) => {
+        const active = index === activeIndex;
+        link.classList.toggle('active', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    let scheduled = false;
+    function scheduleNavigationUpdate() {
+      if (scheduled) return;
+      scheduled = true;
+      window.requestAnimationFrame(() => { updateActiveSection(); scheduled = false; });
+    }
+    window.addEventListener('scroll', scheduleNavigationUpdate, { passive: true });
+    window.addEventListener('resize', scheduleNavigationUpdate);
+    window.addEventListener('load', updateActiveSection);
+    updateActiveSection();
+  </script>
+</body>
+</html>
